@@ -4,42 +4,37 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
+
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
+
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import { Link } from 'react-router-dom';
+import Drawer from '@mui/material/Drawer';
+import Foto from "../images/foto2.jpg";
+import MyDial from "./mydial";
 
-const pages = ['Home', 'About', 'Projects' , 'Contact'];
-const settings = [];
+const pages = ['Home','About', 'Contact', 'Projects'];
+
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+
+  const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
 
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+         
           <Typography
             variant="h6"
             noWrap
@@ -55,7 +50,6 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            LOGO
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -64,39 +58,37 @@ function ResponsiveAppBar() {
               aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
-              onClick={handleOpenNavMenu}
+              onClick={()=> setIsDrawerOpen(true)}
               color="inherit"
             >
               <MenuIcon />
             </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
+       
+            <Drawer
+              anchor='left'
+              open={isDrawerOpen}
+              onClose={ () => setIsDrawerOpen(false)}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+              <Box p={2} width='200px' textAlign='center' role='presentation'  onClick={()=> setIsDrawerOpen(false)}>
+            
+                  <Typography variant='h6' textAlign="center" component='div'>
+                      Menu
+                  </Typography>   
+
+                  {pages.map((page) => (
+                 <MenuItem key={page} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                  <Link style={{textDecoration: "none", color: "black"}}  to={`/${page}`}>{page}</Link>
+                  </Typography>
                 </MenuItem>
               ))}
-            </Menu>
+              </Box>
+            </Drawer>
+                  
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+         
           <Typography
-            variant="h5"
+            variant="h8"
             noWrap
             component="a"
             href=""
@@ -111,52 +103,45 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+       
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+        
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}> 
             {pages.map((page) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                {page}
+                <Link style={{textDecoration: "none", color: "white"}}  to={`/${page}`}>{page}</Link>
               </Button>
+              
             ))}
+             <Typography 
+                variant="h8" 
+                align="center"
+                noWrap
+                component="a"
+                sx={{
+                  mr: 1,
+                  flexGrow: 1,
+                  mt: "22px",
+                  fontFamily: 'monospace',
+                  fontWeight: 300,
+                  letterSpacing: '.2rem',
+                  color: 'inherit',
+                  textDecoration: 'none',
+                }}>
+                 
+              </Typography>
           </Box>
+          <MyDial/>
+          <Avatar alt="Remy Sharp" src={Foto}sx={{ width: 70, height: 70 }}/>
 
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
         </Toolbar>
       </Container>
     </AppBar>
+    
   );
 }
 export default ResponsiveAppBar;

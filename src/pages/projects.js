@@ -1,13 +1,16 @@
 import React from "react";
+import MyTimeline from '../components/mytimeline';
 
 
-function Projects() {
+
+const Projects = () => {
     return (
-        <div>
-            <h1>Welcome to Projects PAge</h1>
 
-        </div>
+        <MyTimeline></MyTimeline>
+
+        
     );
 }
+
 
 export default Projects;

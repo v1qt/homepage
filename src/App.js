@@ -4,20 +4,21 @@ import Contact from './pages/contact';
 import About from './pages/about';
 import NoPage from './pages/nopage';
 import Projects from './pages/projects';
-import NavBar from "./components/navigation";
-import { BrowserRouter, Routes, Route} from "react-router-dom";
-import RespNavBar from "./components/navbar";
+import NavBar from "./components/navbar";
+
+
+
+import { Routes, Route} from "react-router-dom";
+
 
 function App() {
   return (
   
     <div className='App'>
         
-
-        <BrowserRouter>
         <NavBar/>
-        <RespNavBar/>
-
+        
+        <p></p>
          <Routes>
             <Route index element={<Home />} />
             <Route path="/" element={<Home />}/>
@@ -27,7 +28,8 @@ function App() {
             <Route path="/projects" element={<Projects />}/>
             <Route path="*" element={<NoPage />} />
           </Routes>
-        </BrowserRouter>
+       
+          
     </div>
   );  
 }
