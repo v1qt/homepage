@@ -31,7 +31,7 @@ function ResponsiveAppBar() {
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
 
   return (
-    <AppBar position="static">
+    <AppBar position="sticky">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
          

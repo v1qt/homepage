@@ -20,7 +20,7 @@ function BasicSpeedDial() {
     <Box sx={{ height: 50, transform: 'translateZ(50px)', flexGrow: 1 }}>
       <SpeedDial
         ariaLabel="SpeedDial basic example"
-        sx={{ position: 'absolute', bottom: -240, right:20 }}
+        sx={{ position: 'absolute', top: 100, right: -60 }}
         direction='down'
         icon={<SpeedDialIcon icon={<MdPhone/>} openIcon={<PhoneEnabledIcon/>} />}
       >
