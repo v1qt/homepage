@@ -28,6 +28,7 @@ function App() {
             <Route path="/contact" element={<Contact />}/>
             <Route path="/projects" element={<Projects />}/>
             <Route path="*" element={<NoPage />} />
+            <Route path="*" element={<NoPage />} />
           </Routes>
        
           
